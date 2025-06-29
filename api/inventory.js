@@ -6,8 +6,8 @@ export default function handler(req, res) {
   if (!username) return res.status(400).json({ error: 'Username required' });
 
   const player = players[username.toLowerCase()];
-  if (!player || Date.now() - player.lastSeen > 30 * 1000) {
-    return res.status(404).json({ error: 'Player not in-game or data expired' });
+  if (!player) {
+    return res.status(404).json({ error: 'Player not found' });
   }
 
   return res.status(200).json({ player: username, userId: player.userId, data: player.data });
